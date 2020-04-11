@@ -60,8 +60,18 @@ class Project(models.Model):
     def __str__(self):
         return self.project_title
 
+    def get_absolute_url(self):
+        return reverse('group-project-detail', kwargs={'pk': self.pk})
+
 
 class FinalProject(models.Model):
+    project_type = (
+        ("data_science", "data_science"),
+        ("project_proposal", "Project Proposal"),
+        ("project_erd", "Project (ERD)"),
+        ("time_management", "Time Management"),
+    )
+    project_type = models.CharField(max_length=100, choices=project_type, default='data_science')
     title = models.CharField(max_length=100)
     introduction = models.TextField(default=False)
     content = models.TextField()

@@ -5,12 +5,16 @@ from django.shortcuts import render, reverse,get_object_or_404,redirect
 from .forms import RegisterForm, UserUpdateForm, ProfileUpdateForm, CustomRegisterForm
 from django. contrib import messages
 from django.contrib.auth.decorators import login_required
-from account.models import Coordinator, Dean, Hod, Supervisor, StudentGroup
+from account.models import Coordinator, Dean, Hod, Supervisor, StudentGroup, FinalProjects
 from users.models import CustomerUser
 
 
 def home(request):
-    return render(request, 'home.html')
+    project = FinalProjects.objects.all()
+    context = {
+        'project': project
+    }
+    return render(request, 'home.html', context=context)
 
 
 def userRegisterpage(request):
@@ -88,7 +92,7 @@ def dashboard(request, pk):
     users = User.objects.get(pk=pk)
     hods = Hod.objects.filter(hod_name=users)
     custom = CustomerUser.objects.filter(username=users)
-    students = StudentGroup.objects.all()
+    students = StudentGroup.objects.filter(student_name=users)
     deans = Dean.objects.filter(dean_name=users)
     coordinators = Coordinator.objects.filter(user_name=users)
     teachers = Supervisor.objects.filter(supervisor_name=users)

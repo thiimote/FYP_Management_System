@@ -26,10 +26,9 @@
             <td>{{ object.student_name }}</td>
         </tr>
     </table>
-            {% if object.author == user %}
-        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'student-update' object.id %}" style="float:right">Update</a>
-        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'student-delete' object.id %}" style="float:right;margin-right:10px">Delete</a>
-        {% endif %}
+        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'student-update' object.id %}" style="float:right;border-radius: 23px;font-size: 19px;">Update</a>
+        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'student-delete' object.id %}" style="float:right;margin-right:10px;border-radius: 23px;font-size: 19px;">Delete</a>
+
         </div>
     </div>
 

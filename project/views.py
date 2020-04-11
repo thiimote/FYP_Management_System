@@ -1,7 +1,7 @@
 from account.models import StudentGroup, Dean, Hod, Supervisor
 from project.models import School, Department, Groups, Project, GroupProgress
 from users.models import CustomerUser
-from .forms import AddGroupForm, AddGroupProgressForm
+from .forms import AddGroupForm, AddGroupProgressForm, CreateDepartment
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -71,10 +71,48 @@ class StudentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         post = self.get_object()
-        if self.request.user == post.author:
-            return True
-        return False
+        # if self.request.user == post.author:
+        #     return True
+        return True
 
+
+class GroupProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Project
+    success_url = '/'
+
+    def test_func(self):
+        post = self.get_object()
+        # if self.request.user == post.author:
+        #     return True
+        return True
+
+
+class GroupProjectCreateView(LoginRequiredMixin, CreateView):
+    model = Project
+    fields = ['group_id', 'project_title', 'project_description']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+class GroupProjectDetailView(LoginRequiredMixin, DetailView):
+    model = Project
+
+
+class GroupProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Project
+    fields = ['project_title', 'project_description']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        # if self.request.user == post.author:
+        #     return True
+        return True
 
 
 class StudentCreateView(LoginRequiredMixin, CreateView):
@@ -96,9 +134,9 @@ class StudentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         post = self.get_object()
-        if self.request.user == post.author:
-            return True
-        return False
+        # if self.request.user == post.author:
+        #     return True
+        return True
 
 
 @login_required
@@ -217,18 +255,34 @@ def create_group(request):
     return render(request, 'hod/addgroup.html', {'form': form})
 
 
-
 @login_required
-def hodSingle_supervisor(request, pk):
-    customs = CustomerUser.objects.get(pk=pk)
-    supervisors = Supervisor.objects.all()
+def hodSupervisorDetail(request, pk):
+    customs_user = CustomerUser.objects.get(pk=pk)
     groups = Groups.objects.all()
     students = StudentGroup.objects.all()
+    supervisors = Supervisor.objects.all()
 
     context = {
             'groups': groups,
-            'custom': customs,
-            'students': students,
             'supervisors': supervisors,
+            'students': students,
+            'customs_user': customs_user,
             }
     return render(request, 'hod/supervisor.html', context=context)
+
+
+@login_required
+def create_department(request):
+    form = CreateDepartment(request.POST)
+    if request.method == 'POST':
+        try:
+            if form.is_valid():
+                group = form.save(commit=False)
+                group.save()
+                messages.success(request, 'Department was created successfully')
+        except Exception as e:
+            form = AddGroupForm()
+            messages.warning(request, 'Sorry, Department not created, try again.Error : {}'.format(e))
+
+    return render(request, 'hod/create_department.html', {'form': form})
+

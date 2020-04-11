@@ -1,4 +1,4 @@
-from project.models import Groups, GroupProgress
+from project.models import Groups, GroupProgress, Department
 from django import forms
 
 
@@ -13,3 +13,8 @@ class AddGroupProgressForm(forms.ModelForm):
         model = GroupProgress
         fields = ['group_id', 'files_type', 'file_title', 'file_description']
 
+
+class CreateDepartment(forms.ModelForm):
+    class Meta:
+        model = Department
+        fields = ['school_id',  'department_name']

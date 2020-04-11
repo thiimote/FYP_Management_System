@@ -58,12 +58,12 @@
                             <td>{{members.student_name.username.first_name}}</td>
                             <td>{{members.student_name.username.last_name}}</td>
                             <td>{{members.student_name}}</td>
-                            <td><a class="btn btn-sm btn-info" href="{% url 'student-detail' members.id %}">Edit</a></td>
+                            <td><a style="font-size: 23px;padding: 0;text-transform: capitalize;"  href="{% url 'student-detail' members.id %}">Edit</a></td>
                         </tr>
 				{% endfor %}
             </table>
                      <br>
-                        <a href="{% url 'student-create'%}" class="btn btn-secondary">Add Student</a>
+                        <a style="padding:0px" href="{% url 'student-create'%}" class="btn btn-secondary">Add Student</a>
 		</div>
 
             </div>

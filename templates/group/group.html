@@ -7,7 +7,7 @@
 <div class="row" style="background:#d6d6fa;margin-bottom:8px;max-width:100%" >
     <div class="col">
         <h3 align="center" style="color: brown;font-style: italic;font-weight: bold;margin-top:20px">
-            Group Name : {{groups.group_name}} </h3>
+            Group Name : {{groups.group_name}} </h3>{{user.username}}
     </div>
 </div>
 
@@ -78,25 +78,23 @@
 
 
             <div class="tab-pane fade" id="list-project" role="tabpanel" aria-labelledby="list-project-list">
+                <a href="{% url 'group-projects-create' %}"> Add new Project</a>
                 <table class="table" style="margin-top:50px">
-                    <thead>
+                     {% for project in projects %}
+
                     <tr style="background:#0f48997d;">
-                        <td style="color:#0923cd;;font-weight:bold"> Project Title</td>
+                        <td style="color:#0923cd;;font-weight:bold"> Project Title
+                        <h5><a style="color:white" href="{% url 'group-project-detail' project.pk %}">{{project.project_title}}</a></h5>
+                   </td>
                     </tr>
-                    {% for project in projects %}
-                    <tr><a href="#"><i style="float:right">Edit Project</i></a>
-                        <th scope="col">{{project.project_title}}</th>
-                    </tr>
-                    {% endfor %}
-                    <tr style="background:#0f48997d;">
-                        <td style="color:#0923cd;font-weight:bold"> Project Description</td>
-                    </tr>
-                    {% for project in projects %}
+
                     <tr>
-                        <th scope="col"> {{project.project_description}}</th>
+                         <td style="color:#0923cd;;font-weight:bold"> Project Description</td>
+                    </tr>
+                    <tr>
+                           <td scope="col"> {{project.project_description}}</td>
                     </tr>
                     {% endfor %}
-                    </thead>
                 </table>
 
             </div>

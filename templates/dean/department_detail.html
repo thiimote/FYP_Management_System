@@ -9,7 +9,7 @@
 
         <div class="tab-pane fade show active" id="list-chat" role="tabpanel" aria-labelledby="list-chat-list">
             <div class="card-deck mt-3 ml-3 mr-3">
-                <div class="card ml-0 mr-0">
+                <div class="card ml-0 mr-0" style="max-width: 460px;">
                     <div class="card-body">
                         <h5 class="card-title text-align-centre">Project Organiser(PO)</h5>
 
@@ -39,120 +39,30 @@
                             </tbody>
                         </table>
                         <br>
-
+                            progress
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title"><i style="color:red;margin-right:9px" class="fa fa-group"> </i>Groups</h5>
-                        <table class="table">
-                            <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">Id</th>
-                                <th scope="col">Group Names</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for group in groups %}
-                            <tr>
-                                <th scope="row">{{group.id}}</th>
-                                <td><a href="{% url 'hod_group_detail' group.pk %}" class="btn btn-link">{{group.group_name}} </a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                <div class="card" style="max-width:fit-content">
+                    <div class="card-body" style="max-width:fit-content">
+                        <h5 class="card-title" style="max-width:fit-content">
+                            <i style="color:red;margin-right:9px" class="fa fa-group"> </i>Projects</h5>
                         <br>
-                        <a href="{% url 'add_group' %}" class="btn btn-secondary">
-                            <i style="color:red;margin-right:9px" class="fa fa-plus"></i>Group</a>
+                        <hr>
+                            {% for project in projects %}
 
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Project Supervisors</h5>
-
-                        <table border="1" class="table">
-                            <thead>
-                            <tr style="background:#4d7db0;">
-                                <td> No</td>
-                                <td> Names</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for customs in custom %}
-                             {% if customs.role == 'supervisor' %}
-                            <tr>
-                                <th scope="row">{{customs.id}}</th>
-                                <td><a href="{% url 'hodSingle_supervisor' customs.pk %}" class="btn btn-link">{{ customs.first_name }}   {{ customs.last_name }} </a>
-                                </td>
-
-                            </tr>{% endif %}
+                                <h6><a href="#" style="padding:0px;font-size:15px" class="btn btn-link">{{project.project_title}} </a>
+                              </h6>
                             {% endfor %}
-
-                            </tbody>
-                        </table>
-                       <br>
-                        <a href="#" class="btn btn-info btn-sm">
-                            <i style="color:red;margin-right:9px" class="fa fa-plus"></i>Supervisor</a>
                     </div>
                 </div>
 
             </div>
         </div>
-<!--      system user-->
 
-        <div class="tab-pane fade" id="list-user" role="tabpanel" aria-labelledby="list-user-list">
-
-            </div>
-
-<
-        <div class="tab-pane fade" id="list-progress" role="tabpanel" aria-labelledby="list-progress-list">
-               <h4>  progress </h4>
-<!--            https://developers.google.com/chart/interactive/docs/gallery/piechart-->
-              <div id="piechart" style="width: 900px; height: 500px;"></div>
-            <div id="donutchart" style="width: 900px; height: 500px;"></div>
-            </div>
-        <!--        notifications-->
-        <div class="tab-pane fade" id="list-notification" role="tabpanel" aria-labelledby="list-notification-list">
-               <h4>  notification </h4>
-
-            </div>
-        <!--        messages-->
-        <div class="tab-pane fade" id="list-message" role="tabpanel" aria-labelledby="list-message-list">
-               <h4>  message </h4>
-
-            </div>
-
+    </div>
     </div>
 
 </div>
-
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
-        ]);
-
-        var options = {
-          title: 'My Daily Activities'
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-        chart.draw(data, options);
-      }
-    </script>
 
     {% endblock %}

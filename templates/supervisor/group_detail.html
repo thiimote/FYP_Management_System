@@ -4,43 +4,50 @@
 
 
 <div class="row" style="margin-top:20px;max-width:100%">
-    <div class="col-3" style="background:#3f3636;">
-        <div class="list-group" id="list-tab" role="tablist" style="padding:20px">
-            <a id="list-dashboard-list" data-toggle="list" style="padding-bottom:30px"
+    <div class="col-3" style="">
+        <div class="list-group" id="list-tab" role="tablist" style="padding:10px">
+
+            <a id="list-dashboard-list" data-toggle="list"
+               style = "padding-bottom: 19px;background: #495057;color: white;text-align: center;padding-top: 19px;font-weight: bolder;margin-top:3px"
                class="nav-item nav-link nav-link-item-active" href="#list-dashboard" role="tab"
                aria-controls="dashboard">
-                <i style="color:white;margin-right:9px" class="fa fa-home"></i> My Group</a>
+                <i style="color:white;margin-right:9px;" class="fa fa-home"></i> My Group</a>
 
-            <a id="list-project-list" data-toggle="list" style="padding-bottom:30px"
+            <a id="list-project-list" data-toggle="list"
+                style = "padding-bottom: 19px;background: #495057;color: white;text-align: center;padding-top: 19px;font-weight: bolder;margin-top:3px"
                class="nav-item nav-link" href="#list-project" role="tab" aria-controls="project">
                 Projects</a>
 
-            <a id="list-notification-list" data-toggle="list" style="padding-bottom:30px"
+            <a id="list-notification-list" data-toggle="list"
+                style = "padding-bottom: 19px;background: #495057;color: white;text-align: center;padding-top: 19px;font-weight: bolder;margin-top:3px"
                class="nav-item nav-link" href="#list-notification" role="tab" aria-controls="notification">
                 <i style="color:red;margin-right:9px" class="fa fa-bell"></i> Notifications</a>
 
-            <a id="list-uploads-list" data-toggle="list" style="padding-bottom:30px"
+            <a id="list-uploads-list" data-toggle="list"
+                style = "padding-bottom: 19px;background: #495057;color: white;text-align: center;padding-top: 19px;font-weight: bolder;margin-top:3px"
                class="nav-item nav-link" href="#list-uploads" role="tab" aria-controls="uploads">
                 Uploaded files</a>
 
-            <a id="list-progress-list" data-toggle="list" style="padding-bottom:30px"
+            <a id="list-progress-list" data-toggle="list"
+                style = "padding-bottom: 19px;background: #495057;color: white;text-align: center;padding-top: 19px;font-weight: bolder;margin-top:3px"
                class="nav-item nav-link" href="#list-progress" role="tab" aria-controls="progress">
                 <i style="color:red;margin-right:9px" class="fa fa-spinner"></i>Group Progress</a>
 
-            <a id="list-chat-list" data-toggle="list" style="padding-bottom:30px"
+            <a id="list-chat-list" data-toggle="list"
+               style = "padding-bottom: 19px;background: #495057;color: white;text-align: center;padding-top: 19px;font-weight: bolder;margin-top:3px"
                class="nav-item nav-link" href="#list-chat" role="tab" aria-controls="chat">
                 Chat</a>
         </div>
     </div>
 
-    <div class="col" style="margin-right:20px">
+    <div class="col" style="margin-right:10px">
         <div class="tab-content" id="nav-tabContent">
 
             <!--         group dashboard-->
 
             <!--         project-->
             <div class="tab-pane fade" id="list-project" role="tabpanel" aria-labelledby="list-project-list"
-                 style="margin-left:30px;margin-right: 27px;">
+                 style="margin-left:10px;margin-right:7px;">
 
                 {% for teacher in teachers %}
 
@@ -162,7 +169,6 @@
 
                 <h5 style="color:blue;margin-top:30px "> Group Name : {{teacher.group_id}}</h5>
                 <div class="card card-body">
-
 			        <table class="table table-sm">
                         <tr>
                             <th>Type of File</th>
@@ -175,12 +181,18 @@
                         <tr>
                             <td>{{pro.files_type}}</td>
                             <td>Date Submitted</td>
-                            <td><a class="btn btn-sm btn-info" href="#">Approve</a></td>
-                            <td><a class="btn btn-sm btn-danger" href="#">Delete</a></td>
+                            <td>
+
+
+                                <button class="btn btn-sm btn-info" onclick = "getConfirmation();"> Approve </button>
+                            </td>
+                            <td> <button class="btn btn-sm btn-danger" onclick="deletefunction()"> Delete </button>
+                            </td>
                         </tr>
                 {% endif %}
 				{% endfor %}
 			</table>
+
 		</div>
                 <br>
                 {% endfor %}
@@ -210,7 +222,7 @@
 
                     <!--    group display-->
 
-                    <div class="row" style="background:#4d4d4d;color:white;margin-left:20px">
+                    <div class="row" style="background:#4d4d4d;color:white;margin-left:5px">
                         <div class="col-4" style="margin-top:30px">
                             <img class="rounded-circle article-img" style="width:60px"
                                  src="{{stud.student_name.profile.image.url}}" alt="...">

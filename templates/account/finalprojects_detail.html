@@ -6,7 +6,7 @@
     <img class="rounded-circle article-img" style="width:50px;height:60px" src="{{ object.author.profile.image.url }}">
         <div class="media-body">
             <div class="article-metadata">
-                <a style="margin-left:20px" class="mr-2" href="{% url 'user-posts' object.author.username %}" >{{ object.author }}</a>
+                <a style="margin-left:20px" class="mr-2" href="{% url 'user-posts' object.author.username %}" >Supervisor : {{ object.author }}</a>
                 <small class="text-muted">{{ object.date_posted|date:"F d, Y"  }}</small>
                 {% if object.author == user %}
                 <div style="margin-left:20px">
@@ -34,38 +34,36 @@
              Project background
          </div>
          <div style="margin-top:15px">
-            {{projects.background}}
+            {{object.introduction}}
          </div>
           <hr>
          <div style="background:#c7c7d1;text-align:center;margin-top:40px;padding:4px;font-size:23px;">
              Project problem Statement
          </div>
          <div style="margin-top:15px">
-            {{projects.problem}}
+            {{object.problem_statement}}
          </div>
           <hr>
          <div style="background:#c7c7d1;text-align:center;margin-top:40px;padding:4px;font-size:23px;">
              Project addition Notes
          </div>
          <div style="margin-top:15px">
-            {{projects.addition}}
+            {{object.scope}}
          </div>
-
-
 
          <hr>
          <div style="background:#c7c7d1;text-align:center;margin-top:40px;padding:4px;font-size:23px;">
              Project supervisor
          </div>
          <div style="margin-top:15px">
-            {{projects.supervisor}}
+            {{object.author}}
          </div>
          <hr>
          <div style="background:#c7c7d1;text-align:center;margin-top:40px;font-size:23px;padding:4px">
              Project Source code
          </div>
          <div style="margin-top:15px">
-             {{projects.link}}<td><a href="{{projects.link}}" download=""><i style="background: #097d31;color: white;padding:5px;" class="fa fa-download"></i></a>
+             {{object.source_code}}<td><a href="{{projects.link}}" download=""><i style="background: #097d31;color: white;padding:5px;" class="fa fa-download"></i></a>
          </div>
 
 
